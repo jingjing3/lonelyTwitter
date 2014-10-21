@@ -21,12 +21,23 @@ public class IntentReaderActivity extends Activity {
 		return text;
 	}
 	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_intent_reader);
+		Intent intent = getIntent();
+		text = intent.getStringExtra(TEXT_KEY);
+		mode = intent.getIntExtra(TRANSFORM_KEY, NORMAL);
+		text = transformText(text);
+		TextView widget = (TextView) findViewById(R.id.intentText);
+		if (text !=null){
+			widget.setText(text);
+		}
+		else{
+			widget.setText("No msg avaliable now");}
+		
 	}
-	
 	public String transformText(String text) {
 		switch (mode) {
 			case REVERSE:
